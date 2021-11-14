@@ -1,0 +1,268 @@
+<template lang="pug">
+  BlockTemplate(
+    :config='config'
+    :edit='edit'
+    :header='true'
+    :padding='0'
+    overflow='visible'
+    @mount='isMounted'
+    :elementsModal='false'
+  )
+    template(v-slot:header)
+      .schema_block_container_title {{ config.props.title }}
+      .schema_block_settings_btn(
+        ref='settings'
+        v-if='!edit && !popup.show'
+        @click="onClickPopupBtn"
+      )
+        font-awesome-icon(icon="search-plus")
+
+    template(v-slot:content)
+      .schema_block_container_body
+        .chart(ref="chart" :style='{height: "100%", width: "100%"}')
+</template>
+
+<script>
+import { mapActions, mapState } from 'vuex'
+import moment from 'moment'
+import _ from 'lodash'
+import {
+  options,
+  useTheme,
+  create,
+  color,
+  ColorSet
+} from '@amcharts/amcharts4/core';
+import {
+  XYChart,
+  DateAxis,
+  ValueAxis,
+  LineSeries,
+  XYCursor,
+  Legend
+} from '@amcharts/amcharts4/charts';
+import am4themes_dark from '@amcharts/amcharts4/themes/dark';
+
+export default {
+  name: "BlockChart",
+
+  components: {
+    BlockTemplate: () => import('@/components/Schema/Templates/BlockTemplate'),
+  },
+  props: {
+    config: {
+      type: Object,
+      require: false
+    },
+
+    edit: {
+      type: Boolean,
+      require: false
+    }
+  },
+
+  data() {
+    return {
+      chartColors: [
+        '#2E7774',
+        '#827345',
+        '#5667B8',
+        '#C77067',
+        '#255794',
+        '#63B4FF',
+        '#7C67C7',
+        '#77A7C7',
+        '#9DB1CC',
+        '#D7D7D7',
+        '#99CC99',
+        '#CC9966',
+        '#999966',
+        '#669999',
+        '#6699FF',
+        '#9999FF',
+        '#C5D0E6',
+        '#8B8C7A',
+        '#5D76CB',
+        '#996699',
+
+        '#9599FF',
+        '#C1D0E6',
+        '#1B8C7A',
+        '#1D76CB',
+        '#956699',
+      ],
+    };
+  },
+
+  watch: {
+    'config.chart': function(val) {
+      // обновляем график
+      this.updateChartData()
+    },
+
+  },
+
+  computed: {
+    ...mapState({
+      popup: state => state.store_modal.schemaChartModal,
+    }),
+
+    getChartData() {
+      const result = {}
+      Object.keys(this.config.chart).forEach(key => {
+        const line = this.config.chart[key].map(item => {
+          return {
+            date: new Date(item.date),
+            value: item.value
+          }
+        })
+        
+        result[key] = _.sortBy(line, 'date')
+      })
+      return result
+    }
+  },
+
+  methods: {
+    ...mapActions({
+      setPopup: 'store_modal/setSchemaChartPopup',
+    }),
+
+    onClickPopupBtn() {
+      let popup = {
+        show: true,
+        config: this.config
+      }
+      this.setPopup(popup)
+    },
+
+    isMounted() {
+      this.makeChart();
+    },
+
+    // МЕТОДЫ ГНАФИКА ↓ 
+    getColorSet(target) {
+      if (target instanceof ColorSet) {
+        this.chartColors.forEach(c => {
+          target.list.push(color(c))
+        })
+      }
+    },
+    updateChartData() {
+      this.chart.series.values.forEach(line => {
+        line.data = this.getChartData[line.name]
+      });
+      this.chart.invalidateRawData();
+    },
+    createSeries(key, i) {
+      const series = this.chart.series.push(new LineSeries());
+      series.data = this.getChartData[key]
+      series.dataFields.valueY = 'value';
+      series.dataFields.dateX = 'date';
+      series.name = key;
+      series.strokeWidth = 2;
+      // Настройка всплывающей подсказки с данными(tooltip)
+      series.tooltip.getFillFromObject = false;
+      series.tooltip.background.fill = color('#272a38');
+      series.tooltip.background.fillOpacity = 1;
+      series.tooltip.background.stroke = color('#BEBFC3', 0.2);
+      series.tooltipHTML = `
+        <table style="font-size: 12px; color: #BEBFC3; margin: 0; padding: 0;">   
+          <tr >
+            <td valign='left'><div style="height: 15px; width: 15px; border-radius: 15px; margin-right: 5px; background: ${this.chartColors[i]};"></div></td>
+            <td> ${key}</td>
+            <td> :: {dateX.formatDate("HH:mm")} :: </td>
+            <td style="color: #FFF;"><b style="margin-left: 5px;">{valueY}</b></td>
+          </tr>
+        </table>`
+      // отображение в легенде
+      series.legendSettings.labelText = `[bold {color}]{valueY.close}[/]`;
+      series.legendSettings.valueText = "{name}";
+      series.legendSettings.itemLabelText = "[bold {color}] {valueY}[/]";
+    },
+
+    createDateAxis() {
+      const dateAxis = this.chart.xAxes.push(new DateAxis());
+      dateAxis.renderer.minGridDistance = 40;
+      dateAxis.renderer.fontSize = 10;
+      dateAxis.timezone = 'UTC'
+      dateAxis.tooltip.background.fill = color('#272a38');
+      dateAxis.tooltip.background.stroke = color('#BEBFC3', 0.2);
+      dateAxis.tooltip.background.cornerRadius = 3;
+      dateAxis.tooltip.label.fill = color('#BEBFC3');
+      dateAxis.tooltip.label.fontSize = 10;
+    },
+
+    createValueAxis() {
+      const valueAxis = this.chart.yAxes.push(new ValueAxis());
+      valueAxis.renderer.fontSize = 10;
+      valueAxis.tooltip.background.fill = color('#272a38');
+      valueAxis.tooltip.background.stroke = color('#BEBFC3', 0.2);
+      valueAxis.tooltip.background.cornerRadius = 3;
+      valueAxis.tooltip.label.fill = color('#BEBFC3');
+      valueAxis.tooltip.label.fontSize = 10;
+    },
+
+    createLagend() {
+      this.chart.legend = new Legend();
+      this.chart.legend.fontSize = 11;
+      this.chart.legend.itemContainers.template.height = 20;
+      this.chart.legend.labels.template.marginTop = 0;
+      this.chart.legend.position = "right";
+      this.chart.legend.scrollable = true;
+      this.chart.legend.scrollbar.background.fill = color('#272A38')
+      this.chart.legend.scrollbar.thumb.background.fill = color('#1C1F2B')
+      this.chart.legend.marginTop = 0;
+      this.chart.legend.marginRight = 5;
+      this.chart.legend.maxWidth = undefined;
+      this.chart.legend.itemContainers.template.paddingTop = 0;
+      this.chart.legend.itemContainers.template.paddingBottom = 0;
+    },
+
+    makeChart() {
+      useTheme(am4themes_dark); // темная тема
+      useTheme(this.getColorSet); // тема линий
+
+      options.onlyShowOnViewport = true;
+
+      // создание графика
+      this.chart = create(this.$refs.chart, XYChart);
+      this.chart.logo.disabled = true 
+      this.chart.paddingLeft = 0;
+      this.chart.paddingRight = 0;
+      this.chart.paddingBottom = 0;
+      this.chart.data = this.getChartData
+
+      //  подключение курсора
+      this.chart.cursor = new XYCursor();
+      this.chart.cursor.tooltip.background.fill = color('green');
+      this.chart.tooltip.background.fill = color('red');
+
+      this.createDateAxis() // создание оси дат, и ее настройка
+      this.createValueAxis() // создание оси значений, и ее настройка
+      Object.keys(this.getChartData).forEach((key, i) => { // серий данных, и их настройка
+        this.createSeries(key, i)
+      })
+      this.createLagend() // легенда 
+    },
+  },
+
+  beforeDestroy() {
+    if (this.chart) {
+      this.chart.dispose();
+    }
+  },
+};
+</script>
+
+<style lang="less" scoped>
+.schema_block_container {
+  &_body {
+    height: 100%;
+    width: 100%;
+  }
+}
+.schema_block_settings_btn {
+z-index: 1;
+}
+</style>
