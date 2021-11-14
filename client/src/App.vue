@@ -1,7 +1,7 @@
 <template lang="pug">
 #app
   //- button(@click='Massage') NEW MASSAGE
-  Block(header='Block' area='1/1/2/5')
+  Block(header='Block' area='1/1/2/3')
     p
       |Lorem ipsum dolor sit amet, consectetur adipiscing
       |elit, sed do eiusmod tempor incididunt ut labore et
@@ -9,6 +9,8 @@
       |quis nostrud exercitation ullamco laboris nisi ut
       |aliquip ex ea commodo consequat.
     Button(text='Test')
+  Block(header='Block' area='1/3/5/11' :padding='0')
+    Chart
 </template>
 
 <script>
@@ -17,6 +19,7 @@ export default {
   components: {
     Block: () => import('@/components/Block.vue'),
     Button: () => import('@/components/Button.vue'),
+    Chart: () => import('@/components/Chart.vue'),
   },
   sockets: {
     connect() {
