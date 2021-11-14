@@ -2,13 +2,18 @@
 .block(:style='{gridArea: this.area}')
   .block_header(v-if='header') {{ header }}
   .block_body(:style='getStyle')
-    slot
+    .block_load(v-if='load')
+      Loader
+    slot(v-else)
       span no content...
 </template>
 
 <script>
 export default {
   name: 'Block',
+  components: {
+    Loader: () => import('@/components/Loader.vue'),
+  },
   props: {
     header: {
       type: String,
@@ -21,6 +26,10 @@ export default {
     col: {
       type: Boolean,
       default: true,
+    },
+    load: {
+      type: Boolean,
+      default: false,
     },
     gap: {
       type: Number,
@@ -69,11 +78,15 @@ export default {
     font-size: 12px;
   }
 
-  &_body {
+  &_body, &_load {
     display: flex;
     overflow-y: auto;
     width: 100%;
     height: 100%;
+  }
+  &_load {
+    align-items: center;
+    justify-content: center;
   }
 }
 </style>

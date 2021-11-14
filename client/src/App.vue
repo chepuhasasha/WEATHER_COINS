@@ -1,16 +1,16 @@
 <template lang="pug">
 #app
   //- button(@click='Massage') NEW MASSAGE
-  Block(header='Block' area='1/1/2/3')
+  Block(header='purse' area='1/1/3/3')
     p
       |Lorem ipsum dolor sit amet, consectetur adipiscing
       |elit, sed do eiusmod tempor incididunt ut labore et
-      |dolore magna aliqua. Ut enim ad minim veniam,
-      |quis nostrud exercitation ullamco laboris nisi ut
-      |aliquip ex ea commodo consequat.
+  Block(header='Scripts' area='3/1/5/3')
     Button(text='Test')
   Block(header='Block' area='1/3/5/11' :padding='0')
     Chart
+  Block(header='Log' area='1/11/3/13')
+  Block(header='Buffer' area='3/11/5/13' :load='true')
 </template>
 
 <script>
