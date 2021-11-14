@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueSocketIO from 'vue-socket.io';
 import App from './App.vue';
 import store from './store';
+import './less/main.less';
 
 Vue.config.productionTip = false;
 
