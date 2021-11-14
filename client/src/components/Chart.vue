@@ -16,7 +16,10 @@ export default {
     theme(target) {
       if (target instanceof am4core.ColorSet) {
         // eslint-disable-next-line no-param-reassign
-        target.list = [am4core.color('yellow')];
+        target.list = [
+          am4core.color('white').lighten(-0.7),
+          am4core.color('yellow'),
+        ];
       }
       if (target instanceof am4core.InterfaceColorSet) {
         target.setFor('fill', am4core.color('#yellow'));
@@ -65,8 +68,47 @@ export default {
 
     const series = chart.series.push(new am4charts.LineSeries());
     series.dataFields.dateX = 'date';
+    series.background.fill = chart.colors.getIndex(1);
     series.dataFields.valueY = 'value';
     series.tooltip.background.stroke = am4core.color('yellow');
+
+    const seriesRange = dateAxis.createSeriesRange(series);
+    seriesRange.contents.strokeDasharray = '10,2';
+    seriesRange.contents.stroke = chart.colors.getIndex(1);
+    seriesRange.contents.strokeWidth = 1;
+
+    const pattern = new am4core.LinePattern();
+    pattern.rotation = -45;
+    pattern.stroke = seriesRange.contents.stroke;
+    pattern.width = 500;
+    pattern.height = 500;
+    pattern.gap = 5;
+    seriesRange.contents.fill = pattern;
+    seriesRange.contents.fillOpacity = 0.5;
+
+    const range = dateAxis.axisRanges.push(new am4charts.DateAxisDataItem());
+    range.grid.stroke = chart.colors.getIndex(1);
+    range.grid.strokeOpacity = 1;
+    range.bullet = new am4core.ResizeButton();
+    range.bullet.background.fill = chart.colors.getIndex(1);
+    range.bullet.background.states.copyFrom(chart.zoomOutButton.background.states);
+    range.bullet.minX = 0;
+    range.bullet.adapter.add('minY', (minY, target) => {
+      // eslint-disable-next-line no-param-reassign
+      target.maxY = chart.plotContainer.maxHeight;
+      // eslint-disable-next-line no-param-reassign
+      target.maxX = chart.plotContainer.maxWidth;
+      return chart.plotContainer.maxHeight;
+    });
+
+    const firstTime = chart.data[0].date.getTime();
+    const lastTime = chart.data[chart.data.length - 1].date.getTime();
+    const date = new Date(firstTime + (lastTime - firstTime) / 1.2);
+
+    range.date = date;
+
+    seriesRange.date = date;
+    seriesRange.endDate = chart.data[chart.data.length - 1].date;
 
     series.tooltipText = '{valueY.value}';
     chart.cursor = new am4charts.XYCursor();

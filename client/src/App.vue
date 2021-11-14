@@ -1,16 +1,20 @@
 <template lang="pug">
 #app
   //- button(@click='Massage') NEW MASSAGE
-  Block(header='purse' area='1/1/3/3')
-    p
-      |Lorem ipsum dolor sit amet, consectetur adipiscing
-      |elit, sed do eiusmod tempor incididunt ut labore et
-  Block(header='Scripts' area='3/1/5/3')
+  Block(header='purse' area='1/1/3/3' :gap='0' :padding='0')
+    Purse(name='BTC' val='0.13929')
+    Purse(name='RUB' val='1 000 000')
+    Purse(name='USD' val='30 000')
+  Block(header='Settings' area='3/1/5/3' load)
     Button(text='Test')
   Block(header='Block' area='1/3/5/11' :padding='0')
     Chart
   Block(header='Log' area='1/11/3/13')
-  Block(header='Buffer' area='3/11/5/13' :load='true')
+    Event
+    Event
+    Event
+    Event
+  Block(header='Buffer' area='3/11/5/13' load)
 </template>
 
 <script>
@@ -20,6 +24,8 @@ export default {
     Block: () => import('@/components/Block.vue'),
     Button: () => import('@/components/Button.vue'),
     Chart: () => import('@/components/Chart.vue'),
+    Event: () => import('@/components/Event.vue'),
+    Purse: () => import('@/components/Purse.vue'),
   },
   sockets: {
     connect() {
