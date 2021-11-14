@@ -7,9 +7,13 @@ export default new Vuex.Store({
   state: {
   },
   mutations: {
+    // "<MUTATION_PREFIX><EVENT_NAME>"() {
+    //     // do something
+    // }
   },
   actions: {
-  },
-  modules: {
+    SOCKET_newMassage(ctx, data) {
+      console.log(data);
+    },
   },
 });

@@ -1,16 +1,30 @@
-const express = require('express')
-const path = require('path')
-const app = express()
+const consola = require('consola')
+const app = require('express')()
+const server = require('http').createServer(app)
+const cors = require('cors')
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'index.html'))
+const io = require('socket.io')(server, {
+  cors: {
+    origin: '*'
+  }
 })
-app.get('/about', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'about.html'))
+
+const port = process.env.PORT || 3000
+server.listen(port, () => {
+  consola.ready({
+    message: `SERVER LISTENING ON: ${port}`,
+    badge: true
+  })
 })
 
-const PORT = process.env.PORT || 3000
-
-app.listen(3000, () => {
-  console.log(`server is running on port: ${PORT}`)
+io.on('connection', (socket) => {
+  consola.ready({
+    message: `IO CONNECTED`,
+    badge: true
+  })
+  socket.on('createMassage', (data) => {
+    io.emit('newMassage', {
+      text: data.text + ' SERVER'
+    })
+  })
 })
