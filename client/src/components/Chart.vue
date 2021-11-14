@@ -22,12 +22,16 @@ export default {
         ];
       }
       if (target instanceof am4core.InterfaceColorSet) {
-        target.setFor('fill', am4core.color('#yellow'));
-        target.setFor('primaryButton', am4core.color('#000'));
-        target.setFor('primaryButtonActive', am4core.color('#yellow'));
-        target.setFor('primaryButtonHover', am4core.color('#yellow'));
+        target.setFor('primaryButton', am4core.color('rgb(20, 20, 20)'));
+        target.setFor('primaryButtonActive', am4core.color('black'));
+        target.setFor('primaryButtonHover', am4core.color('rgb(12, 12, 12)'));
+
+        target.setFor('secondaryButton', am4core.color('rgb(20, 20, 20)'));
+        target.setFor('secondaryButtonActive', am4core.color('black'));
+        target.setFor('secondaryButtonHover', am4core.color('rgb(12, 12, 12)'));
+
         target.setFor('grid', am4core.color('#fff').lighten(-0.4));
-        target.setFor('alternativeBackground', am4core.color('#yellow'));
+        target.setFor('alternativeBackground', am4core.color('yellow'));
         target.setFor('text', am4core.color('#fff').lighten(-0.7));
       }
     },
@@ -90,7 +94,8 @@ export default {
     range.grid.stroke = chart.colors.getIndex(1);
     range.grid.strokeOpacity = 1;
     range.bullet = new am4core.ResizeButton();
-    range.bullet.background.fill = chart.colors.getIndex(1);
+    // range.bullet.background.fill = chart.colors.getIndex(1);
+    range.bullet.background.stroke = chart.colors.getIndex(1);
     range.bullet.background.states.copyFrom(chart.zoomOutButton.background.states);
     range.bullet.minX = 0;
     range.bullet.adapter.add('minY', (minY, target) => {
