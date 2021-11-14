@@ -23,10 +23,10 @@ export default {
   border: 2px solid #fff;
   opacity: 1;
   border-radius: 50%;
-  animation: loader 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  animation: loader 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
 .loader div:nth-child(2) {
-  animation-delay: -1.5s;
+  animation-delay: -0.5s;
 }
 @keyframes loader {
   0% {
