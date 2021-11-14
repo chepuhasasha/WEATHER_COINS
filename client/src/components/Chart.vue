@@ -50,14 +50,23 @@ export default {
 
     const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
     dateAxis.renderer.grid.template.location = 0;
+    dateAxis.renderer.minGridDistance = 40;
+    dateAxis.renderer.fontSize = 12;
+    // dateAxis.timezone = 'UTC';
+    dateAxis.tooltip.background.fill = am4core.color('rgb(20, 20, 20)');
+    dateAxis.tooltip.background.cornerRadius = 3;
+    dateAxis.tooltip.label.fill = am4core.color('#BEBFC3');
+    dateAxis.tooltip.label.fontSize = 10;
 
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.tooltip.disabled = true;
     valueAxis.renderer.minWidth = 35;
+    valueAxis.renderer.fontSize = 12;
 
     const series = chart.series.push(new am4charts.LineSeries());
     series.dataFields.dateX = 'date';
     series.dataFields.valueY = 'value';
+    series.tooltip.background.stroke = am4core.color('yellow');
 
     series.tooltipText = '{valueY.value}';
     chart.cursor = new am4charts.XYCursor();

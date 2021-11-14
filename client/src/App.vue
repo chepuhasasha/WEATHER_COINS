@@ -57,6 +57,8 @@ export default {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(4, 1fr);
+  gap: 10px;
+  padding: 10px;
 
   background: @bg_0;
 }
