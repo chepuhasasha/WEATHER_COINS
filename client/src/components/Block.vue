@@ -70,6 +70,7 @@ export default {
   }
 
   &_body {
+    display: flex;
     overflow-y: auto;
   }
 }

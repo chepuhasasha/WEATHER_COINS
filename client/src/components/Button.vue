@@ -53,6 +53,13 @@ export default {
 <style lang='less'>
 @import '../less/global.less';
 .button {
+  width: max-content;
+  max-width: max-content;
+  min-width: max-content;
+  height: max-content;
+  max-height: max-content;
+  min-height: max-content;
+
   transition: filter ease-in-out .2s;
   cursor: pointer;
   padding: 6px 10px;
