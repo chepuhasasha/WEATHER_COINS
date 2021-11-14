@@ -2,19 +2,8 @@
 .block(:style='{gridArea: this.area}')
   .block_header(v-if='header') {{ header }}
   .block_body(:style='getStyle')
-    slot(name='body')
-      h1 test
-      h1 test
-      h1 test
-      h1 test
-      h1 test
-      h1 test
-      h1 test
-      h1 test
-      h1 test
-      h1 test
-      h1 test
-      h1 test
+    slot
+      span no content...
 </template>
 
 <script>

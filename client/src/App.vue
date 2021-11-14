@@ -2,6 +2,7 @@
 #app
   //- button(@click='Massage') NEW MASSAGE
   Block(header='Block' area='1/1/2/5')
+    Button(text='Test' status='danger')
 </template>
 
 <script>
@@ -9,6 +10,7 @@ export default {
   name: 'App',
   components: {
     Block: () => import('@/components/Block.vue'),
+    Button: () => import('@/components/Button.vue'),
   },
   sockets: {
     connect() {
