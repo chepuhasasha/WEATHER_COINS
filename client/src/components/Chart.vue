@@ -37,7 +37,7 @@ export default {
     chart.paddingLeft = 0;
     chart.paddingRight = 0;
     chart.paddingBottom = 0;
-    chart.paddingRight = 20;
+    chart.paddingRight = 10;
 
     const data = [];
     let visits = 10;
