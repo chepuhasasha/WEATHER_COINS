@@ -33,6 +33,10 @@ export default {
     am4core.useTheme(this.theme);
     const chart = am4core.create(this.$refs.chartdiv, am4charts.XYChart);
     chart.logo.disabled = true;
+    chart.logo.disabled = true;
+    chart.paddingLeft = 0;
+    chart.paddingRight = 0;
+    chart.paddingBottom = 0;
     chart.paddingRight = 20;
 
     const data = [];
