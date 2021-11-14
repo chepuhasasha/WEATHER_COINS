@@ -2,7 +2,7 @@
 #app
   //- button(@click='Massage') NEW MASSAGE
   Block(header='Block' area='1/1/2/5')
-    Button(text='Test' status='danger')
+    Button(text='Test')
 </template>
 
 <script>

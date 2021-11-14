@@ -53,17 +53,18 @@ export default {
 <style lang='less'>
 @import '../less/global.less';
 .button {
-  transition: background ease-in-out .2s;
+  transition: filter ease-in-out .2s;
   cursor: pointer;
   padding: 6px 10px;
   font-size: 12px;
+  font-weight: 700;
   text-transform: uppercase;
   border-radius: 4px;
   background: @primary_100;
   color: @text_0;
   letter-spacing: 1px;
   &:hover {
-    background: @primary_0;
+    filter: brightness(120%);
   }
 }
 </style>
@@ -71,10 +72,14 @@ export default {
 <style lang="less" module>
 @import '../less/global.less';
 .active {
-  background: red;
+  background: @bg_0;
+  color: @primary_100;
+  box-shadow: 0 0 0 2px @primary_100;
 }
 .disable {
-  background: blue;
+  cursor: not-allowed;
+  background: @bg_200;
+  color: @text_200;
 }
 .load {
   background: green;
