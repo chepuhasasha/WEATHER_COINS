@@ -74,8 +74,10 @@ export default {
   &_header {
     padding: 10px;
     color: @text_100;
+    background: @bg_100;
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-size: 12px;
   }
 
   &_body {
