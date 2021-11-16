@@ -16,5 +16,95 @@
       "name": "BTC",
       "val": 0.0013
     }
+  },
+  {
+    "id": "123",
+    "time_open": "1637060400",
+    "profit": 0.3,
+    "commision": {
+      "taker": 0.3,
+      "maker": 0.3
+    },
+    "sold_price": 1234,
+    "sold": {
+      "name": "RUB",
+      "val": 1000
+    },
+    "bought": {
+      "name": "BTC",
+      "val": 0.0013
+    }
+  },
+  {
+    "id": "123",
+    "time_open": "1637060400",
+    "profit": 0.3,
+    "commision": {
+      "taker": 0.3,
+      "maker": 0.3
+    },
+    "sold_price": 1234,
+    "sold": {
+      "name": "RUB",
+      "val": 1000
+    },
+    "bought": {
+      "name": "BTC",
+      "val": 0.0013
+    }
+  },
+  {
+    "id": "123",
+    "time_open": "1637060400",
+    "profit": 0.3,
+    "commision": {
+      "taker": 0.3,
+      "maker": 0.3
+    },
+    "sold_price": 1234,
+    "sold": {
+      "name": "RUB",
+      "val": 1000
+    },
+    "bought": {
+      "name": "BTC",
+      "val": 0.0013
+    }
+  },
+  {
+    "id": "123",
+    "time_open": "1637060400",
+    "profit": 0.3,
+    "commision": {
+      "taker": 0.3,
+      "maker": 0.3
+    },
+    "sold_price": 1234,
+    "sold": {
+      "name": "RUB",
+      "val": 1000
+    },
+    "bought": {
+      "name": "BTC",
+      "val": 0.0013
+    }
+  },
+  {
+    "id": "123",
+    "time_open": "1637060400",
+    "profit": 0.3,
+    "commision": {
+      "taker": 0.3,
+      "maker": 0.3
+    },
+    "sold_price": 1234,
+    "sold": {
+      "name": "RUB",
+      "val": 1000
+    },
+    "bought": {
+      "name": "BTC",
+      "val": 0.0013
+    }
   }
 ]

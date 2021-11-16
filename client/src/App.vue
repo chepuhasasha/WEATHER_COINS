@@ -13,8 +13,8 @@
   Block(header='Orders' :area='layout.orders' :gap='0' load)
   Block(header='Buffer' :area='layout.buffer' :gap='1' :padding='1')
     template(v-slot:header)
-      span 1000 RUB
-      span (2)
+      span {{ getBufferInfo.val }}
+      span ({{ getBufferInfo.count }})
     Buffer(
       v-for='(item, i) in buffer'
       :key='i'
@@ -78,6 +78,13 @@ export default {
         'grid-template-rows': `repeat(${this.layout.grid.rows}, 1fr)`,
         gap: `${this.layout.grid.gap}px`,
         padding: `${this.layout.grid.padding}px`,
+      };
+    },
+    getBufferInfo() {
+      // const val = this.buffer.reduce((a, b) => a + b.spend.val);
+      return {
+        val: 1000,
+        count: this.buffer.length,
       };
     },
   },
