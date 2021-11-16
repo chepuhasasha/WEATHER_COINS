@@ -1,19 +1,29 @@
 <template lang="pug">
   .buffer
     .buffer_cell
-      span.buffer_lbl spent
-      .buffer_val {{ item.tool.val }} {{ item.tool.name }}
+      span.buffer_lbl(v-if='!minimize') Потратил USD
+      .buffer_val 100
     .buffer_cell
-      span.buffer_lbl now
-      .buffer_val {{ now }} {{ item.tool.name }}
+      span.buffer_lbl(v-if='!minimize') Сейчас USD
+      .buffer_val 89
     .buffer_cell
-      span.buffer_lbl profit
-      .buffer_val {{ getProfit }} {{ item.tool.name }}
+      span.buffer_lbl(v-if='!minimize') Купил BTC
+      .buffer_val 0.013
+    .buffer_cell
+      span.buffer_lbl(v-if='!minimize') Профит
+      .buffer_val -11%
+    .buffer_cell
+      span.buffer_lbl(v-if='!minimize') мин. профит
+      .buffer_val 1%
+    Button(text='➔' status='danger')
 </template>
 
 <script>
 export default {
   name: 'Buffer',
+  components: {
+    Button: () => import('@/components/Button.vue'),
+  },
   props: {
     profit: {
       type: Number,
@@ -61,9 +71,13 @@ export default {
 .buffer {
   display: flex;
   align-items: center;
-  background: @bg_100;
+  background: @bg_200;
+  border: 1px solid @bg_100;
   padding: 5px;
   gap: 5px;
+  &:hover {
+    background: @bg_100;
+  }
   &_cell {
     display: flex;
     flex-direction: column;
@@ -71,6 +85,7 @@ export default {
     padding: 5px;
     border-radius: 4px;
     gap: 5px;
+    width: 100%;
   }
   &_val {
     line-height: 11px;
@@ -78,10 +93,10 @@ export default {
     color: @text_0;
   }
   &_lbl {
-    font-size: 10px;
+    font-size: 8px;
     color: @text_100;
     text-transform: uppercase;
-    line-height: 8px;
+    line-height: 6px;
   }
 }
 </style>

@@ -41,9 +41,12 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background: @bg_200;
+  background: @bg_0;
   border-radius: 4px;
   border: @border_0;
+  &:hover {
+    background: @bg_100;
+  }
   &_status {
     background: gray;
     height: 10px;
@@ -51,19 +54,18 @@ export default {
     border-radius: 50%;
   }
   &_header {
-    padding: 5px 10px;
+    padding: 0 5px;
     align-items: center;
     justify-content: space-between;
     display: flex;
   }
   &_time {
-    font-size: 12px;
+    font-size: 10px;
   }
   &_msg {
     font-size: 12px;
     color: @text_0;
-    padding: 10px;
-    background: @bg_0;
+    padding: 0 5px;
   }
 }
 </style>

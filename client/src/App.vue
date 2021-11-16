@@ -1,7 +1,7 @@
 <template lang="pug">
 #app(:style='getGrid')
   //- button(@click='Massage') NEW MASSAGE
-  Block(header='purse' :area='layout.purse' :gap='0' :padding='0')
+  Block(header='purse' :area='layout.purse' :gap='1' :padding='1')
     Purse(name='BTC' val='0.13929')
     Purse(name='RUB' val='1 000 000')
     Purse(name='USD' val='30 000')
@@ -9,9 +9,20 @@
     Button(text='Test')
   Block(header='Chart' :area='layout.chart' :padding='0')
     Chart
-  Block(header='Buffer' :area='layout.buffer')
+  Block(header='Orders' :area='layout.orders' :gap='0' load)
+  Block(header='Buffer' :area='layout.buffer' :gap='1' :padding='1')
     Buffer
-  Block(header='Log' :area='layout.log')
+    Buffer
+    Buffer
+    Buffer
+    Buffer
+  Block(header='Log' :area='layout.log' :gap='1' :padding='1')
+    Event
+    Event
+    Event
+    Event
+    Event
+    Event
     Event
     Event
     Event
@@ -45,7 +56,8 @@ export default {
       purse: '1/1/3/3',
       settings: '3/1/6/3',
       chart: '1/3/4/11',
-      buffer: '4/3/6/11',
+      orders: '4/3/6/7',
+      buffer: '4/7/6/11',
       log: '1/11/6/13',
     },
     something: [

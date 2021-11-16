@@ -64,12 +64,12 @@ export default {
   cursor: pointer;
   padding: 6px 10px;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 300;
   text-transform: uppercase;
   border-radius: 4px;
   background: @primary_100;
   color: @text_0;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   &:hover {
     filter: brightness(120%);
   }
