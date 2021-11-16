@@ -53,12 +53,14 @@ export default {
     ],
   }),
   computed: {
-    getGrid: () => ({
-      'grid-template-columns': `repeat(${this.layout.grid.cols}, 1fr)`,
-      'grid-template-rows': `repeat(${this.layout.grid.rows}, 1fr)`,
-      gap: `${this.layout.grid.gap}px`,
-      padding: `${this.layout.grid.padding}px`,
-    }),
+    getGrid() {
+      return {
+        'grid-template-columns': `repeat(${this.layout.grid.cols}, 1fr)`,
+        'grid-template-rows': `repeat(${this.layout.grid.rows}, 1fr)`,
+        gap: `${this.layout.grid.gap}px`,
+        padding: `${this.layout.grid.padding}px`,
+      };
+    },
   },
   methods: {
     Massage() {
