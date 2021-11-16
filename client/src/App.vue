@@ -43,10 +43,10 @@ export default {
         padding: 10,
       },
       purse: '1/1/3/3',
-      settings: '3/1/5/3',
+      settings: '3/1/6/3',
       chart: '1/3/4/11',
-      buffer: '4/3/5/11',
-      log: '1/11/5/13',
+      buffer: '4/3/6/11',
+      log: '1/11/6/13',
     },
     something: [
       // ... something here for the data if you need.
