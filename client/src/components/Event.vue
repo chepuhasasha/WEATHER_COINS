@@ -29,11 +29,11 @@ export default {
   computed: {
     getClasses() {
       return {
-        [this.$style[this.event.status]]: true,
+        [this.event.status]: true,
       };
     },
     getTime() {
-      return moment(this.event.time * 1000).format('h:mm:ss');
+      return moment(Number(this.event.time) * 1000).format('h:mm:ss');
     },
   },
 };
@@ -62,7 +62,6 @@ export default {
     width: 100%;
   }
   &_status {
-    background: gray;
     height: 100%;
     min-width: 2px;
     max-width: 2px;
@@ -81,16 +80,6 @@ export default {
 }
 </style>
 <style lang="less" module>
-@import '../less/global.less';
-.danger {
-  background: @danger;
-}
-.warning {
-  background: @warning;
-}
-.sucsess {
-  background: @sucsess;
-}
 .minimize {
   white-space: nowrap;
   overflow: hidden;

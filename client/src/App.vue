@@ -15,11 +15,10 @@
     template(v-slot:header)
       span 1000 RUB
       span (2)
-    Buffer
-    Buffer
-    Buffer
-    Buffer
-    Buffer
+    Buffer(
+      v-for='(item, i) in buffer'
+      :key='i'
+      :item='item')
   Block(header='Effect' :area='layout.effect' :padding='0')
     Chart
   Block(header='Log' :area='layout.log' :gap='1' :padding='1')
@@ -36,6 +35,7 @@
 <script>
 import log from '../data/log.json';
 import purse from '../data/purse.json';
+import buffer from '../data/buffer.json';
 
 export default {
   name: 'App',
@@ -91,6 +91,7 @@ export default {
   mounted() {
     this.log = log;
     this.purse = purse;
+    this.buffer = buffer;
   },
 };
 </script>
@@ -100,9 +101,7 @@ export default {
 #app {
   width: 100vw;
   height: 100vh;
-
   display: grid;
-
   background: @bg_0;
 }
 </style>

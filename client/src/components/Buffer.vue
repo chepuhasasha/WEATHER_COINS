@@ -1,10 +1,7 @@
 <template lang="pug">
   .buffer
     .buffer_status(:class='getClass')
-    .buffer_cell(title='Потратил USD') 100
-    .buffer_cell(title='Купил BTC') 0.013
-    .buffer_cell(title='Профит') -11%
-    .buffer_cell(title='мин. профит') 1%
+    .buffer_cell
     Button(text='➔')
 </template>
 
@@ -22,21 +19,21 @@ export default {
     item: {
       type: Object,
       default: () => ({
-        id: '',
-        time: '',
-        status: 'danger',
-        tool: {
-          name: 'USD',
-          val: 100,
+        id: '123',
+        time_open: '1637060400',
+        profit: 0.3,
+        commision: {
+          taker: 0.3,
+          maker: 0.3,
         },
-        target: {
+        sold_price: 1234,
+        sold: {
+          name: 'RUB',
+          val: 1000,
+        },
+        bough: {
           name: 'BTC',
-          val: 0.003,
-        },
-        commission: 0.3,
-        price: {
-          now: 43924,
-          buy: 44204,
+          val: 0.0013,
         },
       }),
     },
@@ -45,21 +42,13 @@ export default {
     minimize: false,
   }),
   computed: {
-    now() {
-      const now = this.item.target.val * this.item.price.now;
-      return now - now * this.item.commission;
-    },
-    getProfit() {
-      const expect = this.item.tool.val + this.item.tool.val * this.profit;
-      return Math.floor(this.now - expect);
-    },
     status() {
       const statuses = ['danger', 'warning', 'sucsess'];
       return statuses[2];
     },
     getClass() {
       return {
-        [this.$style[this.status]]: true,
+        [this.status]: true,
       };
     },
   },
@@ -74,7 +63,6 @@ export default {
   align-items: center;
   background: @bg_0;
   border: @border_100;
-  padding: 5px;
   gap: 5px;
   opacity: 0.7;
   &:hover {
@@ -100,17 +88,5 @@ export default {
     max-width: 2px;
     height: 100%;
   }
-}
-</style>
-<style lang='less' module>
-@import '../less/global.less';
-.danger {
-  background: @danger;
-}
-.warning {
-  background: @warning;
-}
-.sucsess {
-  background: @sucsess;
 }
 </style>

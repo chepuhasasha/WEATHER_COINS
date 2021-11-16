@@ -41,9 +41,7 @@ export default {
         [this.$style.active]: this.active,
         [this.$style.disable]: this.disable,
         [this.$style.load]: this.load,
-        [this.$style.danger]: this.status === 'danger',
-        [this.$style.warning]: this.status === 'warning',
-        [this.$style.sucsess]: this.status === 'sucsess',
+        [this.status]: true,
       };
     },
   },
@@ -91,16 +89,5 @@ export default {
 }
 .load {
   background: green;
-}
-.danger {
-  background: @danger;
-}
-.warning {
-  background: @warning;
-  color: @bg_100;
-}
-.sucsess {
-  background: @sucsess;
-  color: @bg_100;
 }
 </style>
