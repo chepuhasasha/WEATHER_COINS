@@ -92,6 +92,7 @@ export default {
     this.log = log;
     this.purse = purse;
     this.buffer = buffer;
+    console.log(this.buffer);
   },
 };
 </script>

@@ -1,7 +1,9 @@
 <template lang="pug">
   .buffer
     .buffer_status(:class='getClass')
-    .buffer_cell
+    .buffer_body
+      .buffer_cell {{ item.sold.val }} {{ item.sold.name }}
+      .buffer_cell {{ item.bought.val }} {{ item.bought.name }}
     Button(text='➔')
 </template>
 
@@ -31,7 +33,7 @@ export default {
           name: 'RUB',
           val: 1000,
         },
-        bough: {
+        bought: {
           name: 'BTC',
           val: 0.0013,
         },
@@ -70,13 +72,15 @@ export default {
     border: 1px solid @bg_100;
     background: @bg_100;
   }
-  &_cell {
+  &_body {
     display: flex;
     flex-direction: column;
     background: @bg_0;
-    padding: 5px;
-    border-radius: 4px;
+    padding: 5px 0;
     gap: 5px;
+  }
+  &_cell {
+    border-radius: 4px;
     width: 100%;
     line-height: 11px;
     font-size: 14px;
