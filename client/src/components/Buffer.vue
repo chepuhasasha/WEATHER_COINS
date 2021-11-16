@@ -2,17 +2,17 @@
   .buffer
     .buffer_status(:class='getClass')
     .buffer_body
-      .buffer_cell {{ item.sold.val }} {{ item.sold.name }}
-      .buffer_cell {{ item.bought.val }} {{ item.bought.name }}
-    Button(text='➔')
+      .buffer_cell {{ item.sold.name }}: {{ item.sold.val }}
+      .buffer_cell {{ item.bought.name }}: {{ item.bought.val }}
+    .buffer_body
+      .buffer_cell MIN: 10%
+      .buffer_cell NOW: -10%
+    button.buffer_btn ➔
 </template>
 
 <script>
 export default {
   name: 'Buffer',
-  components: {
-    Button: () => import('@/components/Button.vue'),
-  },
   props: {
     profit: {
       type: Number,
@@ -75,7 +75,7 @@ export default {
   &_body {
     display: flex;
     flex-direction: column;
-    background: @bg_0;
+    // background: @bg_0;
     padding: 5px 0;
     gap: 5px;
   }
@@ -91,6 +91,19 @@ export default {
     min-width: 2px;
     max-width: 2px;
     height: 100%;
+  }
+  &_btn {
+    cursor: pointer;
+    height: 100%;
+    border-radius: 0;
+    background: @bg_100;
+    font-weight: 300;
+    color: @text_0;
+    padding: 0 10px;
+    margin-left: auto;
+    &:hover {
+      filter: brightness(150%);
+    }
   }
 }
 </style>
