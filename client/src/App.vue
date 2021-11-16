@@ -1,10 +1,11 @@
 <template lang="pug">
 #app(:style='getGrid')
-  //- button(@click='Massage') NEW MASSAGE
   Block(header='purse' :area='layout.purse' :gap='1' :padding='1')
-    Purse(name='BTC' val='0.13929')
-    Purse(name='RUB' val='1 000 000')
-    Purse(name='USD' val='30 000')
+    Purse(
+      v-for='(item, i) in purse'
+      :key='i'
+      :name='item.name'
+      :val='item.val')
   Block(header='Settings' :area='layout.settings' load)
     Button(text='Test')
   Block(header='Chart' :area='layout.chart' :padding='0')
@@ -26,19 +27,16 @@
       Button(text='1H' active)
       Button(text='1D')
       Button(text='1W')
-    Event
-    Event
-    Event
-    Event
-    Event
-    Event
-    Event
-    Event
-    Event
-    Event
+    Event(
+      v-for='(event, i) in log'
+      :key='i'
+      :event='event')
 </template>
 
 <script>
+import log from '../data/log.json';
+import purse from '../data/purse.json';
+
 export default {
   name: 'App',
   components: {
@@ -70,9 +68,8 @@ export default {
       effect: '4/3/6/11',
       log: '1/11/6/13',
     },
-    something: [
-      // ... something here for the data if you need.
-    ],
+    purse: [],
+    log: [],
   }),
   computed: {
     getGrid() {
@@ -92,9 +89,8 @@ export default {
     },
   },
   mounted() {
-    // this.$socket.subscribe("kebab-case", function (data) {
-    //   console.log("This event was fired by eg. sio.emit('kebab-case')", data);
-    // });
+    this.log = log;
+    this.purse = purse;
   },
 };
 </script>

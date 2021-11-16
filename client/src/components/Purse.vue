@@ -1,7 +1,7 @@
 <template lang='pug'>
 .purse
-  .purse_name {{ name }}
   .purse_val {{ val }}
+  .purse_name {{ name }}
 </template>
 
 <script>
@@ -24,11 +24,13 @@ export default {
 @import '../less/global.less';
 .purse {
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   width: 100%;
+  justify-content: space-between;
+  align-items: center;
   // background: @bg_200;
   border: @border_0;
-  gap: 10px;
+  gap: 0px;
   padding: 10px;
   &_name {
     letter-spacing: 2px;

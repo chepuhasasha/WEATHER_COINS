@@ -1,35 +1,36 @@
 <template lang='pug'>
 .event
-  .event_header(:title='status')
-    .event_time {{ time }}
+  .event_header(:title='event.status')
+    .event_time {{ getTime }}
     .event_status(:class='getClasses')
-  .event_msg {{ msg }}
+  .event_msg {{ event.msg }}
 </template>
 
 <script>
+const moment = require('moment');
+
 export default {
   name: 'Event',
   props: {
-    msg: {
-      type: String,
-      default: 'No massage',
-    },
-    time: {
-      type: String,
-      default: 'no time',
-    },
-    status: {
-      type: String,
-      default: 'danger', // 'danger' || 'warning' || 'sucsess'
+    event: {
+      type: Object,
+      default: () => ({
+        msg: 'No massage',
+        time: 'no time',
+        status: 'danger', // 'danger' || 'warning' || 'sucsess'
+      }),
     },
   },
   computed: {
     getClasses() {
       return {
-        [this.$style.danger]: this.status === 'danger',
-        [this.$style.warning]: this.status === 'warning',
-        [this.$style.sucsess]: this.status === 'sucsess',
+        [this.$style.danger]: this.event.status === 'danger',
+        [this.$style.warning]: this.event.status === 'warning',
+        [this.$style.sucsess]: this.event.status === 'sucsess',
       };
+    },
+    getTime() {
+      return moment(this.event.time * 1000).format('h:mm:ss');
     },
   },
 };
@@ -44,7 +45,7 @@ export default {
   width: 100%;
   background: @bg_0;
   border-radius: 4px;
-  border: @border_0;
+  border: @border_100;
   opacity: 0.7;
   &:hover {
     opacity: 1;
