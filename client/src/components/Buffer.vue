@@ -69,13 +69,16 @@ export default {
 <style lang='less'>
 @import '../less/global.less';
 .buffer {
+  transition: opacity ease .3s;
   display: flex;
   align-items: center;
   background: @bg_200;
   border: 1px solid @bg_100;
   padding: 5px;
   gap: 5px;
+  opacity: 0.7;
   &:hover {
+    opacity: 1;
     background: @bg_100;
   }
   &_cell {

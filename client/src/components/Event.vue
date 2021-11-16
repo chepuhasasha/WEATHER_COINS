@@ -38,13 +38,16 @@ export default {
 <style lang='less'>
 @import '../less/global.less';
 .event {
+  transition: opacity ease .3s;
   display: flex;
   flex-direction: column;
   width: 100%;
   background: @bg_0;
   border-radius: 4px;
   border: @border_0;
+  opacity: 0.7;
   &:hover {
+    opacity: 1;
     background: @bg_100;
   }
   &_status {
