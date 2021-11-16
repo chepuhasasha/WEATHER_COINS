@@ -42,6 +42,7 @@ export default {
 <style lang='less'>
 @import '../less/global.less';
 .event {
+  cursor: pointer;
   display: flex;
   transition: opacity ease .3s;
   width: 100%;
