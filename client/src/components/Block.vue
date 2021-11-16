@@ -1,6 +1,8 @@
 <template lang="pug">
 .block(:style='{gridArea: this.area}')
   .block_header(v-if='header') {{ header }}
+    .block_tools
+      slot(name='header')
   .block_body(:style='getStyle')
     .block_load(v-if='load')
       Loader
@@ -70,12 +72,19 @@ export default {
   border: @border_0;
 
   &_header {
+    display: flex;
+    justify-content: space-between;
     padding: 10px;
     color: @text_100;
     background: @bg_100;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 12px;
+  }
+  &_tools {
+    display: flex;
+    justify-content: right;
+    gap: 5px;
   }
 
   &_body, &_load {

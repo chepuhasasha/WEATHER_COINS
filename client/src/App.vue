@@ -11,12 +11,21 @@
     Chart
   Block(header='Orders' :area='layout.orders' :gap='0' load)
   Block(header='Buffer' :area='layout.buffer' :gap='1' :padding='1')
+    template(v-slot:header)
+      span 1000 RUB
+      span (2)
     Buffer
     Buffer
     Buffer
     Buffer
     Buffer
+  Block(header='Effect' :area='layout.effect' :padding='0')
+    Chart
   Block(header='Log' :area='layout.log' :gap='1' :padding='1')
+    template(v-slot:header)
+      Button(text='1H' active)
+      Button(text='1D')
+      Button(text='1W')
     Event
     Event
     Event
@@ -55,9 +64,10 @@ export default {
       },
       purse: '1/1/3/3',
       settings: '3/1/6/3',
-      chart: '1/3/4/11',
-      orders: '4/3/6/7',
-      buffer: '4/7/6/11',
+      chart: '1/3/3/11',
+      orders: '3/3/4/7',
+      buffer: '3/7/4/11',
+      effect: '4/3/6/11',
       log: '1/11/6/13',
     },
     something: [

@@ -62,16 +62,19 @@ export default {
 
   transition: filter ease-in-out .2s;
   cursor: pointer;
-  padding: 6px 10px;
-  font-size: 12px;
+  padding: 4px;
+  font-size: 10px;
   font-weight: 300;
   text-transform: uppercase;
-  border-radius: 4px;
-  background: @primary_100;
+  border-radius: 2px;
+  background: @bg_0;
   color: @text_0;
   letter-spacing: 2px;
+  line-height: 8px;
+  border:1px solid rgba(255,255,255,0.15);
   &:hover {
     filter: brightness(120%);
+    border:1px solid rgba(255,255,255,0.2);
   }
 }
 </style>
@@ -79,9 +82,7 @@ export default {
 <style lang="less" module>
 @import '../less/global.less';
 .active {
-  background: @bg_0;
-  color: @primary_100;
-  box-shadow: 0 0 0 2px @primary_100;
+  box-shadow: inset 2px 0px 0px 0px @primary_100;
 }
 .disable {
   cursor: not-allowed;
