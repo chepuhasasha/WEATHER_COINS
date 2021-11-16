@@ -1,9 +1,9 @@
 <template lang='pug'>
-.event
-  .event_header(:title='event.status')
+.event(:title='event.status')
+  .event_status(:class='getClasses')
+  .event_body
     .event_time {{ getTime }}
-    .event_status(:class='getClasses')
-  .event_msg {{ event.msg }}
+    .event_msg {{ event.msg }}
 </template>
 
 <script>
@@ -39,9 +39,8 @@ export default {
 <style lang='less'>
 @import '../less/global.less';
 .event {
-  transition: opacity ease .3s;
   display: flex;
-  flex-direction: column;
+  transition: opacity ease .3s;
   width: 100%;
   background: @bg_0;
   border-radius: 4px;
@@ -51,25 +50,27 @@ export default {
     opacity: 1;
     background: @bg_100;
   }
+  &_body {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+  }
   &_status {
     background: gray;
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
-  }
-  &_header {
-    padding: 0 5px;
-    align-items: center;
-    justify-content: space-between;
-    display: flex;
+    height: 100%;
+    min-width: 2px;
+    max-width: 2px;
   }
   &_time {
     font-size: 10px;
+    line-height: 8px;
   }
   &_msg {
     font-size: 12px;
+    line-height: 12px;
+    font-weight: 300;
     color: @text_0;
-    padding: 0 5px;
   }
 }
 </style>

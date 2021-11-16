@@ -37,7 +37,7 @@ export default {
     font-size: 12px;
   }
   &_val {
-    font-size: 20px;
+    font-size: 16px;
     color: @text_0;
     font-weight: 200;
   }
