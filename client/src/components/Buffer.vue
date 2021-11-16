@@ -1,7 +1,7 @@
 <template lang="pug">
   .buffer
+    .buffer_status(:class='getClass')
     .buffer_cell(title='Потратил USD') 100
-    .buffer_cell(title='Сейчас USD') 89
     .buffer_cell(title='Купил BTC') 0.013
     .buffer_cell(title='Профит') -11%
     .buffer_cell(title='мин. профит') 1%
@@ -24,6 +24,7 @@ export default {
       default: () => ({
         id: '',
         time: '',
+        status: 'danger',
         tool: {
           name: 'USD',
           val: 100,
@@ -51,6 +52,15 @@ export default {
     getProfit() {
       const expect = this.item.tool.val + this.item.tool.val * this.profit;
       return Math.floor(this.now - expect);
+    },
+    status() {
+      const statuses = ['danger', 'warning', 'sucsess'];
+      return statuses[2];
+    },
+    getClass() {
+      return {
+        [this.$style[this.status]]: true,
+      };
     },
   },
 };
@@ -85,5 +95,22 @@ export default {
     color: @text_0;
     font-weight: 300;
   }
+  &_status {
+    min-width: 2px;
+    max-width: 2px;
+    height: 100%;
+  }
+}
+</style>
+<style lang='less' module>
+@import '../less/global.less';
+.danger {
+  background: @danger;
+}
+.warning {
+  background: @warning;
+}
+.sucsess {
+  background: @sucsess;
 }
 </style>

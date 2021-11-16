@@ -1,9 +1,11 @@
 <template lang='pug'>
-.event(:title='event.status')
+.event(
+  :title='event.msg'
+  @click='minimize = !minimize')
   .event_status(:class='getClasses')
   .event_body
     .event_time {{ getTime }}
-    .event_msg {{ event.msg }}
+    .event_msg(:class='{[$style.minimize]: minimize}') {{ event.msg }}
 </template>
 
 <script>
@@ -21,12 +23,13 @@ export default {
       }),
     },
   },
+  data: () => ({
+    minimize: true,
+  }),
   computed: {
     getClasses() {
       return {
-        [this.$style.danger]: this.event.status === 'danger',
-        [this.$style.warning]: this.event.status === 'warning',
-        [this.$style.sucsess]: this.event.status === 'sucsess',
+        [this.$style[this.event.status]]: true,
       };
     },
     getTime() {
@@ -55,6 +58,7 @@ export default {
     flex-direction: column;
     gap: 5px;
     padding: 5px;
+    width: 100%;
   }
   &_status {
     background: gray;
@@ -71,6 +75,7 @@ export default {
     line-height: 12px;
     font-weight: 300;
     color: @text_0;
+    max-width: 100%;
   }
 }
 </style>
@@ -84,5 +89,10 @@ export default {
 }
 .sucsess {
   background: @sucsess;
+}
+.minimize {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
