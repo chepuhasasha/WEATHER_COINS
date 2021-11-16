@@ -1,21 +1,11 @@
 <template lang="pug">
   .buffer
-    .buffer_cell
-      span.buffer_lbl(v-if='!minimize') Потратил USD
-      .buffer_val 100
-    .buffer_cell
-      span.buffer_lbl(v-if='!minimize') Сейчас USD
-      .buffer_val 89
-    .buffer_cell
-      span.buffer_lbl(v-if='!minimize') Купил BTC
-      .buffer_val 0.013
-    .buffer_cell
-      span.buffer_lbl(v-if='!minimize') Профит
-      .buffer_val -11%
-    .buffer_cell
-      span.buffer_lbl(v-if='!minimize') мин. профит
-      .buffer_val 1%
-    Button(text='➔' status='danger')
+    .buffer_cell(title='Потратил USD') 100
+    .buffer_cell(title='Сейчас USD') 89
+    .buffer_cell(title='Купил BTC') 0.013
+    .buffer_cell(title='Профит') -11%
+    .buffer_cell(title='мин. профит') 1%
+    Button(text='➔')
 </template>
 
 <script>
@@ -90,17 +80,10 @@ export default {
     border-radius: 4px;
     gap: 5px;
     width: 100%;
-  }
-  &_val {
     line-height: 11px;
     font-size: 14px;
     color: @text_0;
-  }
-  &_lbl {
-    font-size: 8px;
-    color: @text_100;
-    text-transform: uppercase;
-    line-height: 6px;
+    font-weight: 300;
   }
 }
 </style>
