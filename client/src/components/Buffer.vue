@@ -67,6 +67,7 @@ export default {
   background: @bg_0;
   border: @border_100;
   border-radius: 2px;
+  padding-left: 5px;
   gap: 5px;
   opacity: 0.9;
   &:hover {
