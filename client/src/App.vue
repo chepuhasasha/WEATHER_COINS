@@ -11,7 +11,7 @@
   Block(header='Chart' :area='layout.chart' :padding='0')
     Chart
   Block(header='Orders' :area='layout.orders' :gap='0' load)
-  Block(header='Buffer' :area='layout.buffer' :gap='1' :padding='1')
+  Block(header='Buffer' :area='layout.buffer' :gap='5' :padding='5')
     template(v-slot:header)
       span {{ getBufferInfo.val }}
       span ({{ getBufferInfo.count }})
@@ -70,6 +70,7 @@ export default {
     },
     purse: [],
     log: [],
+    buffer: [],
   }),
   computed: {
     getGrid() {
@@ -81,10 +82,14 @@ export default {
       };
     },
     getBufferInfo() {
-      // const val = this.buffer.reduce((a, b) => a + b.spend.val);
+      let val = 0;
+      const count = this.buffer.length;
+      if (count > 0) {
+        val = this.buffer.reduce((a, b) => a + b.sold.val, 0);
+      }
       return {
-        val: 1000,
-        count: this.buffer.length,
+        val,
+        count,
       };
     },
   },
@@ -99,7 +104,6 @@ export default {
     this.log = log;
     this.purse = purse;
     this.buffer = buffer;
-    console.log(this.buffer);
   },
 };
 </script>

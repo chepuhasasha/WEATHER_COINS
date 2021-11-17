@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueSocketIO from 'vue-socket.io';
+import SocketIO from 'socket.io-client';
 import App from './App.vue';
 import store from './store';
 import './less/main.less';
@@ -8,7 +9,16 @@ Vue.config.productionTip = false;
 
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://localhost:3000',
+  connection: SocketIO('http://localhost:3000', {
+    withCredentials: true,
+    transportOptions: {
+      polling: {
+        extraHeaders: {
+          'my-custom-header': 'abcd',
+        },
+      },
+    },
+  }),
   vuex: {
     store,
     actionPrefix: 'SOCKET_',
