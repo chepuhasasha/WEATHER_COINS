@@ -1,13 +1,14 @@
 <template lang="pug">
   .buffer
-    .buffer_status(:class='getClass')
     .buffer_body
       .buffer_cell {{ item.sold.name }}: {{ item.sold.val }}
       .buffer_cell {{ item.bought.name }}: {{ item.bought.val }}
     .buffer_body
       .buffer_cell MIN: 10%
       .buffer_cell NOW: -10%
-    button.buffer_btn ➔
+    button.buffer_btn
+      .buffer_status(:class='getClass')
+      | ➔
 </template>
 
 <script>
@@ -65,6 +66,7 @@ export default {
   align-items: center;
   background: @bg_0;
   border: @border_100;
+  border-radius: 2px;
   gap: 5px;
   opacity: 0.9;
   &:hover {
@@ -88,11 +90,16 @@ export default {
     font-weight: 300;
   }
   &_status {
-    min-width: 2px;
-    max-width: 2px;
-    height: 100%;
+    min-width: 8px;
+    max-width: 8px;
+    min-height: 8px;
+    max-height: 8px;
+    border-radius: 50%;
   }
   &_btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     cursor: pointer;
     height: 100%;
     border-radius: 0;
