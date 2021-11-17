@@ -2,10 +2,10 @@
 .event(
   :title='event.msg'
   @click='minimize = !minimize')
-  .event_status(:class='getClasses')
   .event_body
     .event_time {{ getTime }}
     .event_msg(:class='{[$style.minimize]: minimize}') {{ event.msg }}
+  .event_status(:class='getClasses')
 </template>
 
 <script>
@@ -49,7 +49,9 @@ export default {
   background: @bg_0;
   border-radius: 4px;
   border: @border_100;
-  opacity: 0.7;
+  padding: 5px;
+  opacity: 0.9;
+  gap: 5px;
   &:hover {
     opacity: 1;
     background: @bg_100;
@@ -58,13 +60,14 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    padding: 5px;
-    width: 100%;
+    width: calc(100% - 10px);
   }
   &_status {
-    height: 100%;
-    min-width: 2px;
-    max-width: 2px;
+    min-height: 4px;
+    border-radius: 50%;
+    max-height: 4px;
+    min-width: 4px;
+    max-width: 4px;
   }
   &_time {
     font-size: 10px;

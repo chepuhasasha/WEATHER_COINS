@@ -21,7 +21,7 @@
       :item='item')
   Block(header='Effect' :area='layout.effect' :padding='0')
     Chart
-  Block(header='Log' :area='layout.log' :gap='1' :padding='1')
+  Block(header='Log' :area='layout.log' :gap='5' :padding='5')
     template(v-slot:header)
       Button(text='1H' active)
       Button(text='1D')

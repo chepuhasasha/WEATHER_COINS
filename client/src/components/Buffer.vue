@@ -66,7 +66,7 @@ export default {
   background: @bg_0;
   border: @border_100;
   gap: 5px;
-  opacity: 0.7;
+  opacity: 0.9;
   &:hover {
     opacity: 1;
     border: 1px solid @bg_100;
