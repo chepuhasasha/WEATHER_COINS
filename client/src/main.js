@@ -1,30 +1,26 @@
 import Vue from 'vue';
-import VueSocketIO from 'vue-socket.io';
-import SocketIO from 'socket.io-client';
+import { io } from 'socket.io-client';
 import App from './App.vue';
 import store from './store';
 import './less/main.less';
 
-Vue.config.productionTip = false;
-
-Vue.use(new VueSocketIO({
-  debug: true,
-  connection: SocketIO('http://localhost:3000', {
-    withCredentials: true,
-    transportOptions: {
-      polling: {
-        extraHeaders: {
-          'my-custom-header': 'abcd',
-        },
-      },
-    },
-  }),
-  vuex: {
-    store,
-    actionPrefix: 'SOCKET_',
-    mutationPrefix: 'SOCKET_',
+const urls = ['https://3000-salmon-chameleon-3mhqgvbr.ws-eu18.gitpod.io/', 'http://localhost:3000'];
+const socket = io(urls[0], {
+  withCredentials: true,
+  extraHeaders: {
+    'my-custom-header': 'abcd',
   },
-}));
+});
+
+socket.on('connect', () => {
+  console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+});
+
+socket.on('disconnect', () => {
+  console.log(socket.id); // undefined
+});
+
+Vue.config.productionTip = false;
 
 new Vue({
   store,

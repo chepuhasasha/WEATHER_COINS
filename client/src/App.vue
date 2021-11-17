@@ -47,11 +47,6 @@ export default {
     Purse: () => import('@/components/Purse.vue'),
     Buffer: () => import('@/components/Buffer.vue'),
   },
-  sockets: {
-    connect() {
-      console.log('CLIENT IO CONNECTED');
-    },
-  },
   data: () => ({
     layout: {
       grid: {
@@ -91,13 +86,6 @@ export default {
         val,
         count,
       };
-    },
-  },
-  methods: {
-    Massage() {
-      this.$socket.emit('createMassage', {
-        text: 'CLIENT MASSAGE',
-      });
     },
   },
   mounted() {
