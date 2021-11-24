@@ -1,14 +1,22 @@
 <template lang="pug">
   .buffer
     .buffer_body
-      .buffer_cell {{ item.sold.name }}: {{ item.sold.val }}
-      .buffer_cell {{ item.bought.name }}: {{ item.bought.val }}
+      .buffer_cell(:title='item.sold.name')
+        span.buffer_lbl SOLD
+        .buffer_val {{ item.sold.val }}
+      .buffer_cell(:title='item.bought.name')
+        span.buffer_lbl BOUGHT
+        .buffer_val {{ item.bought.val }}
     .buffer_body
-      .buffer_cell MIN: 10%
-      .buffer_cell NOW: -10%
-    button.buffer_btn
-      .buffer_status(:class='getClass')
-      | ➔
+      .buffer_cell
+        span.buffer_lbl MIN
+        .buffer_val 10%
+      .buffer_cell
+        span.buffer_lbl NOW
+        .buffer_val -10%
+    .buffer_cell
+      .buffer_profit 10
+      button.buffer_btn accept
 </template>
 
 <script>
@@ -67,7 +75,7 @@ export default {
   background: @bg_0;
   border: @border_100;
   border-radius: 2px;
-  padding-left: 5px;
+  padding: 5px;
   gap: 5px;
   opacity: 0.9;
   &:hover {
@@ -78,17 +86,37 @@ export default {
   &_body {
     display: flex;
     flex-direction: column;
-    // background: @bg_0;
-    padding: 5px 0;
+    background: @bg_100;
+    padding: 5px;
     gap: 5px;
   }
   &_cell {
+    display: flex;
+    flex-direction: column;
     border-radius: 4px;
     width: 100%;
+    height: 100%;
     line-height: 11px;
     font-size: 14px;
     color: @text_0;
     font-weight: 300;
+  }
+  &_lbl, &_name {
+    color: @text_100;
+    font-size: 10px;
+  }
+  &_val {
+    font-size: 12px;
+    display: flex;
+    gap: 5px;
+  }
+  &_profit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    height: 100%;
+    width: 100%;
   }
   &_status {
     min-width: 8px;
@@ -98,17 +126,13 @@ export default {
     border-radius: 50%;
   }
   &_btn {
-    display: flex;
-    align-items: center;
-    gap: 5px;
     cursor: pointer;
-    height: 100%;
+    font-size: 12px;
     border-radius: 0;
     background: @bg_100;
     font-weight: 300;
     color: @text_0;
-    padding: 0 10px;
-    margin-left: auto;
+    padding: 5px;
     &:hover {
       filter: brightness(150%);
     }

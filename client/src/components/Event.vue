@@ -47,7 +47,7 @@ export default {
   transition: opacity ease .3s;
   width: 100%;
   background: @bg_0;
-  border-radius: 4px;
+  border-radius: 2px;
   border: @border_100;
   padding: 5px;
   opacity: 0.9;
