@@ -81,7 +81,7 @@ export default {
   &:hover {
     opacity: 1;
     border: 1px solid @bg_100;
-    background: @bg_100;
+    background: @bg_200;
   }
   &_body {
     display: flex;
