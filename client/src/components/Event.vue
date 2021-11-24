@@ -63,17 +63,17 @@ export default {
     width: calc(100% - 10px);
   }
   &_status {
-    min-height: 4px;
-    border-radius: 50%;
-    max-height: 4px;
-    min-width: 4px;
-    max-width: 4px;
+    min-height: 100%;
+    max-height: 100%;
+    min-width: 2px;
+    max-width: 2px;
   }
   &_time {
     font-size: 10px;
     line-height: 8px;
   }
   &_msg {
+    transition: all ease 3s;
     font-size: 12px;
     line-height: 12px;
     font-weight: 300;
@@ -84,8 +84,7 @@ export default {
 </style>
 <style lang="less" module>
 .minimize {
-  white-space: nowrap;
+  height: 0px;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 </style>

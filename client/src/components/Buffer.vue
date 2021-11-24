@@ -100,6 +100,7 @@ export default {
     font-size: 14px;
     color: @text_0;
     font-weight: 300;
+    background: @bg_100;
   }
   &_lbl, &_name {
     color: @text_100;
@@ -126,10 +127,12 @@ export default {
     border-radius: 50%;
   }
   &_btn {
+    text-transform: uppercase;
+    margin: 2px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 10px;
     border-radius: 0;
-    background: @bg_100;
+    background: @bg_0;
     font-weight: 300;
     color: @text_0;
     padding: 5px;
