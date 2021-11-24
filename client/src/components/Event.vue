@@ -84,7 +84,6 @@ export default {
 </style>
 <style lang="less" module>
 .minimize {
-  height: 0px;
-  overflow: hidden;
+  display: none;
 }
 </style>
