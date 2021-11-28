@@ -13,7 +13,7 @@ export default new Vuex.Store({
   },
   actions: {
     SOCKET_newMassage(ctx, data) {
-      console.log(data);
+      console.log(`CLIENT: ${data}`);
     },
   },
 });

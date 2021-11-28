@@ -1,26 +1,21 @@
-const { default: consolaGlobalInstance } = require('consola');
 const consola = require('consola');
-const app = require("express")();
-const httpServer = require("http").createServer(app);
-const port = process.env.PORT || 3000 
-
-const io = require("socket.io")(httpServer, {
+const app = require('express')();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server, {
   cors: {
-    origin: ["http://localhost:8080", "https://8080-salmon-chameleon-3mhqgvbr.ws-eu18.gitpod.io/"],
-    methods: ["GET", "POST"],
-    allowedHeaders: ["my-custom-header"],
-    credentials: true
+    origin: "localhost:8080",
+    methods: ["GET", "POST"]
   }
 });
 
-io.on("connect", socket => {
-  consola.info(`SOCKT ID: ${socket.id}`)
-
-  socket.on("disconnect", (reason) => {
-    console.log(`disconnect ${socket.id} due to ${reason}`);
-  });
+io.on('connection', socket => {
+  consola.ready({ message: `IO CONNECTED || ID: ${socket.id}`, badge: true })
+  socket.emit('newMassage', {
+    text: 'test'
+  })
 });
 
-httpServer.listen(port, () => {
+const port = process.env.PORT || 3000;
+server.listen(port, () => {
   consola.ready({ message: `SERVER LISTENING ON: ${port}`, badge: true })
 });

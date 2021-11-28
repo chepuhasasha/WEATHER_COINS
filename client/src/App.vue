@@ -1,5 +1,6 @@
 <template lang="pug">
 #app(:style='getGrid')
+  h1 {{ test }}
   Block(header='purse' :area='layout.purse' :gap='1' :padding='1')
     Purse(
       v-for='(item, i) in purse'
@@ -39,6 +40,15 @@ import buffer from '../data/buffer.json';
 
 export default {
   name: 'App',
+  /* eslint-disable */
+  sockets: {
+    connect: function () {
+      this.data = 'connected'
+    },
+    test: function (data) {
+      console.log(data)
+    }
+  },
   components: {
     Block: () => import('@/components/Block.vue'),
     Button: () => import('@/components/Button.vue'),
@@ -48,6 +58,7 @@ export default {
     Buffer: () => import('@/components/Buffer.vue'),
   },
   data: () => ({
+    test: 'disconected',
     layout: {
       grid: {
         rows: 5,
